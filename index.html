@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ทฤษฎี (พี) — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #0f1724; /* deep navy */
+      --bg-2: #1b1532; /* deep purple */
+      --glass: rgba(255,255,255,0.06);
+      --card: rgba(255,255,255,0.03);
+      --accent: #00ff9c; /* neon green */
+      --muted: rgba(255,255,255,0.6);
+      --glass-border: rgba(255,255,255,0.08);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Kanit',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(120deg,var(--bg-1),var(--bg-2));color:#e6f0ea}
+    .wrap{min-height:100vh;display:flex;gap:28px;padding:36px;align-items:flex-start}
+
+    /* Glass card base */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);backdrop-filter: blur(8px);box-shadow: 0 8px 30px rgba(2,6,23,0.6);border-radius:var(--radius);}
+
+    /* Layout */
+    .sidebar{width:30%;min-width:260px;padding:24px}
+    .main{flex:1;padding:24px}
+
+    /* Sidebar content */
+    .profile{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .avatar{width:140px;height:140px;border-radius:20px;background:linear-gradient(135deg,#6b5bff,#00ffc3);display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:700;color:#04111a;box-shadow:0 6px 18px rgba(11,22,40,0.6)}
+    .name{font-size:20px;font-weight:700}
+    .role{font-size:13px;color:var(--muted);text-transform:capitalize}
+    .bio{font-size:14px;color:var(--muted);text-align:center}
+    .contacts{display:flex;gap:10px;margin-top:8px}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid var(--glass-border);color:var(--muted);text-decoration:none}
+    .icon-btn svg{width:18px;height:18px}
+
+    /* Main content */
+    .resume{padding:22px;margin-bottom:20px}
+    .resume h1{margin:0;font-size:20px}
+    .typing{margin-top:10px;font-size:15px;color:#dfffe8;min-height:42px}
+    .interests{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .pill{background:rgba(0,0,0,0.25);padding:8px 12px;border-radius:999px;font-size:13px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .project-card{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border)}
+    .project-card h3{margin:0 0 8px 0;font-size:16px}
+    .project-card p{margin:0 0 12px 0;color:var(--muted);font-size:14px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+    .project-actions{display:flex;justify-content:flex-end;margin-top:10px}
+    .btn{background:linear-gradient(90deg,var(--accent),#8be5ff);padding:8px 12px;border-radius:10px;color:#04111a;font-weight:600;border:none;cursor:pointer;text-decoration:none}
+
+    /* Contribution graph */
+    .contrib{margin-top:20px;padding:16px;border-radius:12px}
+    .grid{display:grid;grid-template-columns:repeat(12,18px);gap:6px}
+    .cell{width:18px;height:18px;border-radius:4px;background:#052017;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .level-0{background:#052017}
+    .level-1{background:#0f8f5a}
+    .level-2{background:#10a86a}
+    .level-3{background:#26cf86}
+    .level-4{background:var(--accent)}
+
+    /* Tooltip (simple) */
+    .cell[title]{position:relative}
+    .cell:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.5)}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .wrap{flex-direction:column;padding:18px}
+      .sidebar{width:100%;min-width:auto;order:1}
+      .main{order:2}
+      .projects-grid{grid-template-columns:1fr}
+      .avatar{width:120px;height:120px}
+    }
+
+    @media (max-width:480px){
+      .avatar{width:96px;height:96px;border-radius:14px;font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="sidebar card">
+      <div style="padding:22px">
+        <div class="profile">
+          <div class="avatar">พี</div>
+          <div class="name">ทฤษฎี กงนอก (พี)</div>
+          <div class="role">full stack dev</div>
+          <div class="bio">มังกรพลัดถิ่น อยากเจองูดินเจ้าที่</div>
+          <div class="contacts">
+            <a class="icon-btn" href="https://github.com/" target="_blank" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.612-4.042-1.612-.546-1.387-1.333-1.757-1.333-1.757-1.09-.744.083-.729.083-.729 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.931 0-1.31.467-2.381 1.235-3.221-.135-.303-.54-1.524.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.652.24 2.873.12 3.176.765.84 1.23 1.911 1.23 3.221 0 4.61-2.805 5.625-5.475 5.921.42.36.81 1.096.81 2.21 0 1.595-.015 2.878-.015 3.268 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297 24 5.67 18.627.297 12 .297z"/></svg>
+            </a>
+            <a class="icon-btn" href="mailto:example@email.com" title="Email">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <a class="icon-btn" href="#" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.058-1.865-3.058-1.865 0-2.151 1.459-2.151 2.966v5.696h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.562 2.84-1.562 3.037 0 3.599 2 3.599 4.59v5.605z"/></svg>
+            </a>
+            <a class="icon-btn" href="#" title="Location">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <main class="main">
+      <section class="resume card">
+        <h1>สวัสดี! ผมชื่อ ทฤษฎี 👋</h1>
+        <div class="typing" id="typing" aria-live="polite"></div>
+        <div class="interests" aria-hidden="false">
+          <div class="pill">🧭 Interest: Web & Cloud</div>
+          <div class="pill">💻 Stack: HTML • CSS • JS • Node</div>
+          <div class="pill">⚙️ Tools: Docker • Git • Figma</div>
+          <div class="pill">📚 Learning: AI & DevOps</div>
+        </div>
+      </section>
+
+      <section class="card" style="padding:18px">
+        <h2 style="margin:0 0 12px 0">Showcase Projects</h2>
+        <div class="projects-grid" id="projects">
+          <!-- project cards inserted by HTML below -->
+          <div class="project-card">
+            <h3>Portfolio Site</h3>
+            <p>Landing page with modern UI, animations and responsive layout.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+            <div class="project-actions"><a class="btn" href="#">View</a></div>
+          </div>
+          <div class="project-card">
+            <h3>Task Manager</h3>
+            <p>Simple full-stack app for managing tasks and projects.</p>
+            <div class="tags"><span class="tag">Node</span><span class="tag">Express</span><span class="tag">MongoDB</span></div>
+            <div class="project-actions"><a class="btn" href="#">View</a></div>
+          </div>
+          <div class="project-card">
+            <h3>Mini Game</h3>
+            <p>Browser-based game using canvas and vanilla JS.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">Canvas</span><span class="tag">JS</span></div>
+            <div class="project-actions"><a class="btn" href="#">View</a></div>
+          </div>
+          <div class="project-card">
+            <h3>API Service</h3>
+            <p>Lightweight REST API with authentication and tests.</p>
+            <div class="tags"><span class="tag">Node</span><span class="tag">Jest</span><span class="tag">Docker</span></div>
+            <div class="project-actions"><a class="btn" href="#">View</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contrib card" style="margin-top:16px">
+        <h2 style="margin:0 0 12px 0">Contribution Graph (Mock)</h2>
+        <div class="grid" id="contribGrid" aria-hidden="false"></div>
+        <div style="margin-top:10px;color:var(--muted);font-size:13px">Hover a square to see contributions</div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Typing effect
+    (function(){
+      const el = document.getElementById('typing');
+      const text = 'ผมชอบเขียนโค้ดและเรียนรู้เทคโนโลยีใหม่ๆ ชอบทำโปรเจกต์ที่แก้ปัญหาได้จริง และแบ่งปันความรู้';
+      const speed = 38;
+      let i=0;
+      function type(){
+        if(i<=text.length){
+          el.textContent = text.slice(0,i) + (i%2? '▌':'');
+          i++;
+          setTimeout(type,speed);
+        } else {
+          el.textContent = text; // finish
+        }
+      }
+      setTimeout(type,600);
+    })();
+
+    // Contribution graph mock
+    (function(){
+      const grid = document.getElementById('contribGrid');
+      const cols = 12; const rows = 7; // 12 weeks x 7 days
+      for(let c=0;c<cols;c++){
+        for(let r=0;r<rows;r++){
+          const val = Math.floor(Math.random()*5); // 0..4
+          const cell = document.createElement('div');
+          cell.className = 'cell level-'+val;
+          const contributions = val===0? 0 : Math.floor(Math.random()*6)*(val);
+          const dateStr = new Date(Date.now() - (c*7 + r)*24*60*60*1000).toLocaleDateString('th-TH');
+          cell.title = `${contributions} contributions on ${dateStr}`;
+          grid.appendChild(cell);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
